@@ -1,5 +1,6 @@
 {
   "name": "octofit-tracker-frontend",
+  "description": "React 19 frontend with \"react\": \"^19\"",
   "private": true,
   "version": "0.0.0",
   "type": "module",
