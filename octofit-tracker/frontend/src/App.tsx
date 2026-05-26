@@ -1,121 +1,84 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { NavLink, Route, Routes } from 'react-router-dom'
+import Activities from './components/Activities.jsx'
+import Leaderboard from './components/Leaderboard.jsx'
+import Teams from './components/Teams.jsx'
+import Users from './components/Users.jsx'
+import Workouts from './components/Workouts.jsx'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+const CODESPACE_NAME = import.meta.env.VITE_CODESPACE_NAME?.trim()
+const isCodespaceEnabled = Boolean(CODESPACE_NAME)
+const apiBaseUrl = isCodespaceEnabled
+  ? `https://${CODESPACE_NAME}-8000.app.github.dev/api`
+  : 'http://localhost:8000/api'
 
+function Home() {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="card shadow-sm">
+      <div className="card-body">
+        <h1 className="card-title">OctoFit Tracker</h1>
+        <p className="card-text">
+          This presentation tier consumes the backend logic tier via React Router and Vite environment variables.
+        </p>
+        <p className="small text-muted mb-2">
+          {isCodespaceEnabled ? (
+            <>Using Codespaces API host: <code>{apiBaseUrl}</code></>
+          ) : (
+            <>Using localhost fallback: <code>{apiBaseUrl}</code>. Define <code>VITE_CODESPACE_NAME</code> in <code>.env.local</code>.</>
+          )}
+        </p>
+        <p className="mb-0">
+          Navigate to the resources below to fetch data from the backend via the configured endpoint.
+        </p>
+      </div>
+    </div>
+  )
+}
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+function App() {
+  return (
+    <div className="container py-4">
+      <header className="mb-4">
+        <div className="d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-3">
+          <div>
+            <h1 className="h3 mb-1">OctoFit Tracker</h1>
+            <p className="text-muted mb-0">
+              React 19 frontend with Codespaces-aware API routing and a safe localhost fallback.
+            </p>
+          </div>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      </header>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      <nav className="nav nav-pills mb-4 flex-column flex-sm-row gap-2">
+        <NavLink to="/" end className={({ isActive }) => `nav-link ${isActive ? 'active' : 'text-white-50'}`}>
+          Home
+        </NavLink>
+        <NavLink to="/activities" className={({ isActive }) => `nav-link ${isActive ? 'active' : 'text-white-50'}`}>
+          Activities
+        </NavLink>
+        <NavLink to="/leaderboard" className={({ isActive }) => `nav-link ${isActive ? 'active' : 'text-white-50'}`}>
+          Leaderboard
+        </NavLink>
+        <NavLink to="/teams" className={({ isActive }) => `nav-link ${isActive ? 'active' : 'text-white-50'}`}>
+          Teams
+        </NavLink>
+        <NavLink to="/users" className={({ isActive }) => `nav-link ${isActive ? 'active' : 'text-white-50'}`}>
+          Users
+        </NavLink>
+        <NavLink to="/workouts" className={({ isActive }) => `nav-link ${isActive ? 'active' : 'text-white-50'}`}>
+          Workouts
+        </NavLink>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/activities" element={<Activities />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/teams" element={<Teams />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/workouts" element={<Workouts />} />
+      </Routes>
+    </div>
   )
 }
 

@@ -2,6 +2,15 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
+This project also supports GitHub Codespaces routing via `VITE_CODESPACE_NAME`.
+Create a local `.env.local` file or copy `.env.local.example` and define the Codespace name to route API requests through:
+
+```env
+VITE_CODESPACE_NAME=your-codespace-name
+```
+
+When the environment variable is unset, the frontend safely falls back to `http://localhost:8000/api`.
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)

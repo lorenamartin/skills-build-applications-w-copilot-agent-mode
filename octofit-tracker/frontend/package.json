@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",
+    "bootstrap": "^5.3.8",
     "react": "^19",
     "react-dom": "^19",
+    "react-router-dom": "^6.14.1",
     "vite": "latest"
   },
   "devDependencies": {
